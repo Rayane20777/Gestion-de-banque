@@ -44,9 +44,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "INSERT INTO agence (longitude, latitude, bank_id) VALUES ('$longitude','$latitude' ,'$bank_id')";
+    $sql = "INSERT INTO agence (longitude, latitude, bank_id) VALUES (?, ? , ?)";
+    $statement = $conn->prepare($sql);
+    $statement->bind_param("ddi", $longitude, $latitude, $bank_id);
 
-    if ($conn->query($sql) === TRUE) {
+    if ($statement->execute() === TRUE) {
         echo "New adresse created successfully";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;

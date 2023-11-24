@@ -59,9 +59,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "INSERT INTO adresse (ville, quartier, rue, code_postal, email, telephone) VALUES ('$ville','$quartier' ,'$rue' ,'$code_postal', '$email', '$telephone' )";
+    $sql = "INSERT INTO adresse (ville, quartier, rue, code_postal, email, telephone) VALUES (?, ? , ? , ?, ?, ?)";
+    $statement = $conn->prepare($sql);
+    $statement->bind_param("sssssi", $ville, $quartier, $rue, $code_postal, $email, $telephone);
 
-    if ($conn->query($sql) === TRUE) {
+    if ($statement->execute() === TRUE) {
         echo "New adresse created successfully";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;

@@ -33,9 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "INSERT INTO role (name) VALUES ('$name')";
+    $sql = "INSERT INTO role (name) VALUES (?)";
+    $statement = $conn->prepare($sql);
+    $statement->bind_param("s", $name);
 
-    if ($conn->query($sql) === TRUE) {
+    if ($statement->execute() === TRUE) {
         echo "New role created successfully";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;

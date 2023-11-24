@@ -44,9 +44,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "INSERT INTO user (usersnames, passwords, adresse_id) VALUES ('$usersnames','$passwords' ,'$adresse_id')";
+    $sql = "INSERT INTO role (usersnames , passwords, adresse_id) VALUES (?, ?, ?)";
+    $statement = $conn->prepare($sql);
+    $statement->bind_param("ssi", $usersnames, $passwords, $adresse_id) ;
 
-    if ($conn->query($sql) === TRUE) {
+    if ($statement->execute() === TRUE) {
         echo "New user created successfully";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
