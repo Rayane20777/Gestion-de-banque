@@ -5,12 +5,12 @@
 </head>
 <body>
     <form action="insertUser.php" method="post">
-        <label for="usersname">username:</label>
-        <input type="text" id="usersname" name="username" required>
+        <label for="usersnames">usersnames:</label>
+        <input type="text" id="usersnames" name="usersnames" required>
         <br>
 
-        <label for="password">password:</label>
-        <input type="text" id="password" name="password" required>
+        <label for="passwords">passwords:</label>
+        <input type="text" id="passwords" name="passwords" required>
         <br>
 
         <label for="adresse_id">adress_id:</label>
@@ -29,8 +29,8 @@ include 'index.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $usersname = $_POST['usersname'];
-    $password = $_POST['password'];
+    $usersnames = $_POST['usersnames'];
+    $passwords = $_POST['passwords'];
     $adresse_id = $_POST['adresse_id'];
 
     $servername = "localhost";
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "INSERT INTO user (usersname, password, adresse_id) VALUES ('$usersname','$password' ,'$adresse_id')";
+    $sql = "INSERT INTO user (usersnames, passwords, adresse_id) VALUES ('$usersnames','$passwords' ,'$adresse_id')";
 
     if ($conn->query($sql) === TRUE) {
         echo "New user created successfully";

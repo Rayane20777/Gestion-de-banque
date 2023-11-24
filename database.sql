@@ -1,10 +1,8 @@
-
-
 CREATE DATABASE IF NOT EXISTS cih_bank;
 USE cih_bank;
 
--- Address Table
-CREATE TABLE address (
+-- Adresse Table
+CREATE TABLE adresse (
     id INT PRIMARY KEY AUTO_INCREMENT,
     ville VARCHAR(50),
     quartier VARCHAR(50),
@@ -42,10 +40,10 @@ CREATE TABLE distributeur (
 -- User Table
 CREATE TABLE user (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    usersname VARCHAR(50) UNIQUE,
-    password VARCHAR(255),
-    address_id INT,
-    FOREIGN KEY (address_id) REFERENCES address(id)
+    usersnames VARCHAR(50) UNIQUE,
+    passwords VARCHAR(255),
+    adresse_id INT,
+    FOREIGN KEY (adresse_id) REFERENCES adresse(id)
 );
 
 -- Role Table
