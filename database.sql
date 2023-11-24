@@ -1,3 +1,5 @@
+
+
 CREATE DATABASE IF NOT EXISTS cih_bank;
 USE cih_bank;
 
@@ -40,7 +42,7 @@ CREATE TABLE distributeur (
 -- User Table
 CREATE TABLE user (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(50) UNIQUE,
+    usersname VARCHAR(50) UNIQUE,
     password VARCHAR(255),
     address_id INT,
     FOREIGN KEY (address_id) REFERENCES address(id)

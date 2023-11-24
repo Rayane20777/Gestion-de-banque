@@ -3,19 +3,15 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "CIH";
+$database = "cih_bank";
 
+$conn = new mysqli($servername, $username, $password, $database);
 
-$cnx = new mysqli($servername,$username,$password);
-if($cnx->connect_error){
-    echo 'cnx failed';
-}else{
-    echo'connected ';
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} else {
+    echo "Connected successfully";
 }
-
-
-$creatDb = "CREATE DATABASE IF NOT EXISTS CIH" ;
-$cnx->query($creatDb);
 
 
 
