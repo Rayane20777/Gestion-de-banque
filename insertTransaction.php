@@ -47,9 +47,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "INSERT INTO transaction (type, amount, account_id) VALUES ('$type', '$amount' ,'$account_id')";
+    $sql = "INSERT INTO transaction (type , amount, account_id) VALUES (?, ?, ?)";
+    $statement = $conn->prepare($sql);
+    $statement->bind_param("sdi", $type, $amount, $account_id) ;
 
-    if ($conn->query($sql) === TRUE) {
+    if ($statement->execute() === TRUE) {
         echo "New adresse created successfully";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;

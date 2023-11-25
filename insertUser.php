@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "INSERT INTO role (usersnames , passwords, adresse_id) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO user (usersnames , passwords, adresse_id) VALUES (?, ?, ?)";
     $statement = $conn->prepare($sql);
     $statement->bind_param("ssi", $usersnames, $passwords, $adresse_id) ;
 
