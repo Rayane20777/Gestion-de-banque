@@ -4,7 +4,7 @@
     <title>Insert Adresse</title>
 </head>
 <body>
-    <form action="insertAgence.php" method="post">
+    <form action="insertDistributeur.php" method="post">
         <label for="longitude">Longitude:</label>
         <input type="text" id="longitude" name="longitude" required>
         <br>
@@ -13,8 +13,12 @@
         <input type="text" id="latitude" name="latitude" required>
         <br>
 
-        <label for="bank_id">Bank_id:</label>
-        <input type="text" id="bank_id" name="bank_id" required>
+        <label for="adresse">Adresse:</label>
+        <input type="text" id="adresse" name="adresse" required>
+        <br>
+
+        <label for="agence_id">Agence_id:</label>
+        <input type="text" id="agence_id" name="agence_id" required>
         <br>
 
         <input type="submit" value="Insert Adresse">
@@ -31,7 +35,10 @@ include 'index.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $longitude = $_POST['longitude'];
     $latitude = $_POST['latitude'];
-    $bank_id = $_POST['bank_id'];
+    $adresse = $_POST['adresse'];
+    $agence_id = $_POST['agence_id'];
+
+
 
     $servername = "localhost";
     $username = "root";
@@ -44,9 +51,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "INSERT INTO agence (longitude, latitude, bank_id) VALUES (?, ? , ?)";
+    $sql = "INSERT INTO distributeur (longitude, latitude, adresse, agence_id) VALUES (?, ?, ?, ?)";
     $statement = $conn->prepare($sql);
-    $statement->bind_param("ddi", $longitude, $latitude, $bank_id);
+    $statement->bind_param("ddsi", $longitude, $latitude, $adresse, $agence_id);
 
     if ($statement->execute() === TRUE) {
         echo "New adresse created successfully";

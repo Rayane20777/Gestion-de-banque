@@ -24,6 +24,7 @@ CREATE TABLE agence (
     id INT PRIMARY KEY AUTO_INCREMENT,
     longitude DECIMAL(9,6),
     latitude DECIMAL(9,6),
+    adresse VARCHAR(100),
     bank_id INT,
     FOREIGN KEY (bank_id) REFERENCES bank(id)
 );
@@ -33,6 +34,7 @@ CREATE TABLE distributeur (
     id INT PRIMARY KEY AUTO_INCREMENT,
     longitude DECIMAL(9,6),
     latitude DECIMAL(9,6),
+    adresse VARCHAR(100),
     agence_id INT,
     FOREIGN KEY (agence_id) REFERENCES agence(id)
 );
