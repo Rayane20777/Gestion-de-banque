@@ -1,30 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Insert Adresse</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Account</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
-    <form action="insertAccount.php" method="post">
-        <label for="rib">Rib:</label>
-        <input type="text" id="rib" name="rib" required>
-        <br>
+    <form action="infoInserting/insertAccount.php" method="post" class="p-4 flex flex-col items-center">
+        <label for="rib" class="mb-2 block">Rib:</label>
+        <input type="text" id="rib" name="rib" class="w-full md:w-1/2 pb-2 border border-gray-300 rounded-md" required>
 
-        <label for="devise">Devise:</label>
-        <input type="text" id="devise" name="devise" required>
-        <br>
+        <label for="devise" class="mb-2 block">Devise:</label>
+        <input type="text" id="devise" name="devise" class="w-full md:w-1/2 pb-2 border border-gray-300 rounded-md" required>
 
-        <label for="balance">Balance:</label>
-        <input type="text" id="balance" name="balance" required>
-        <br>
+        <label for="balance" class="mb-2 block">Balance:</label>
+        <input type="number" id="balance" name="balance" class="w-full md:w-3/4 pb-2 border border-gray-300 rounded-md" required>
 
-        <label for="user_id">User_id:</label>
-        <input type="text" id="user_id" name="user_id" required>
-        <br>
+        <label for="user_id" class="mb-2 block">User_id:</label>
+        <input type="number" id="user_id" name="user_id" class="w-full md:w-1/4 pb-2 border border-gray-300 rounded-md" required>
 
-        <input type="submit" value="Insert Adresse">
+        <input type="submit" value="Insert Account" class="mt-4 w-full md:w-1/4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
     </form>
 </body>
 </html>
+
 
 
 

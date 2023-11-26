@@ -1,30 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Insert Adresse</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Distributeur</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
-    <form action="insertDistributeur.php" method="post">
-        <label for="longitude">Longitude:</label>
-        <input type="text" id="longitude" name="longitude" required>
-        <br>
+    <form action="infoInserting/insertDistributeur.php" method="post" class="p-4 flex flex-col items-center">
+        <label for="longitude" class="mb-2 block">Longitude:</label>
+        <input type="text" id="longitude" name="longitude" class="w-full md:w-1/2 pb-2 border border-gray-300 rounded-md" required>
 
-        <label for="latitude">Latitude:</label>
-        <input type="text" id="latitude" name="latitude" required>
-        <br>
+        <label for="latitude" class="mb-2 block">Latitude:</label>
+        <input type="text" id="latitude" name="latitude" class="w-full md:w-1/2 pb-2 border border-gray-300 rounded-md" required>
 
-        <label for="adresse">Adresse:</label>
-        <input type="text" id="adresse" name="adresse" required>
-        <br>
+        <label for="adresse" class="mb-2 block">Adresse:</label>
+        <input type="text" id="adresse" name="adresse" class="w-full md:w-3/4 pb-2 border border-gray-300 rounded-md" required>
 
-        <label for="agence_id">Agence_id:</label>
-        <input type="text" id="agence_id" name="agence_id" required>
-        <br>
+        <label for="agence_id" class="mb-2 block">Agence ID:</label>
+        <input type="number" id="agence_id" name="agence_id" class="w-full md:w-1/4 pb-2 border border-gray-300 rounded-md" required>
 
-        <input type="submit" value="Insert Adresse">
+        <input type="submit" value="Insert Distributeur" class="mt-4 w-full md:w-1/4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
     </form>
 </body>
 </html>
+
 
 
 
