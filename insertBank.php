@@ -33,16 +33,17 @@
         </nav>
 
 
-
-    <form action="insertBank.php" method="post" class="p-4 flex flex-col items-center">
+        <section id="add" class="mt-20 mx-auto max-w-7xl py-6 sm:px-6 lg:px-8 ">
+    <form action="insertBank.php" method="post" class="grid gap-4 grid-cols-2 border-b-4 border-gray-600 pb-4">
         <label for="name" class="mb-2 block">Name:</label>
-        <input type="text" id="name" name="name" class="w-full md:w-1/2 pb-2 border border-gray-300 rounded-md" required>
+        <input type="text" id="name" name="name" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
 
         <label for="bank_logo" class="mb-2 block">Bank logo URL:</label>
-        <input type="text" id="bank_logo" name="bank_logo" class="w-full md:w-3/4 pb-2 border border-gray-300 rounded-md" required>
+        <input type="text" id="bank_logo" name="bank_logo" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
 
-        <input type="submit" value="Insert Bank" class="mt-4 w-full md:w-1/4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+        <input type="submit" value="Insert Bank" class="bg-gray-600 text-white text-xl rounded">
     </form>
+    </section>
 </body>
 </html>
 
