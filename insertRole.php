@@ -48,23 +48,13 @@
 
 
 <?php
-include 'index.php';
+include 'cnx.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "cih_bank";
-
-    $conn = new mysqli($servername, $username, $password, $database);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
+   
     $sql = "INSERT INTO role (name) VALUES (?)";
     $statement = $conn->prepare($sql);
     $statement->bind_param("s", $name);
@@ -76,5 +66,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $conn->close();
+}
+
+$sql = "SELECT * FROM role";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    echo "<table>";
+    echo "<tr>";
+    echo "<th>Id</th>";
+    echo "<th>name</th>";
+    echo "</tr>";
+
+    while ($row = $result->fetch_assoc()) {
+        echo "<tr>";
+        echo "<td>" . $row["id"] . "</td>";
+        echo "<td>" . $row["name"] . "</td>";
+        echo "</tr>";
+    }
+    echo "</table>";
+} else {
+    echo "No results found";
 }
 ?>

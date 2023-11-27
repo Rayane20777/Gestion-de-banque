@@ -54,7 +54,7 @@
 
 
 <?php
-include 'index.php';
+include 'cnx.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -62,16 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $passwords = $_POST['passwords'];
     $adresse_id = $_POST['adresse_id'];
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "cih_bank";
 
-    $conn = new mysqli($servername, $username, $password, $database);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
 
     $sql = "INSERT INTO user (usersnames , passwords, adresse_id) VALUES (?, ?, ?)";
     $statement = $conn->prepare($sql);
@@ -83,6 +74,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
 
-    $conn->close();
+
 }
+
+    $sql = "SELECT * FROM user";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        echo "<table>";
+        echo "<tr>";
+        echo "<th>Id</th>";
+        echo "<th>Usernames</th>";
+        echo "<th>Passwords</th>";
+        echo "<th>Adresse Id</th>";
+        echo "</tr>";
+
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>" . $row["id"] . "</td>";
+            echo "<td>" . $row["usersnames"] . "</td>";
+            echo "<td>" . $row["passwords"] . "</td>";
+            echo "<td>" . $row["adresse_id"] . "</td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+    } else {
+        echo "No results found";
+    }
+
+
+
 ?>

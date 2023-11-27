@@ -43,7 +43,7 @@
                 </select>
 
 
-                <input type="number" id="amount" name="amount" placeholder="alount" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
+                <input type="number" id="amount" name="amount" placeholder="amount" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
 
                 <input type="text" id="account_id" name="account_id" placeholder="account_id" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
 
@@ -58,7 +58,7 @@
 
 
 <?php
-include 'index.php';
+include 'cnx.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -66,16 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $amount = $_POST['amount'];
     $account_id = $_POST['account_id'];
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "cih_bank";
-
-    $conn = new mysqli($servername, $username, $password, $database);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    
 
     $sql = "INSERT INTO transaction (type , amount, account_id) VALUES (?, ?, ?)";
     $statement = $conn->prepare($sql);
@@ -88,5 +79,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $conn->close();
+}
+
+$sql = "SELECT * FROM transaction";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    echo "<table>";
+    echo "<tr>";
+    echo "<th>Id</th>";
+    echo "<th>type</th>";
+    echo "<th>amount</th>";
+    echo "<th>account_id</th>";
+    echo "</tr>";
+
+    while ($row = $result->fetch_assoc()) {
+        echo "<tr>";
+        echo "<td>" . $row["id"] . "</td>";
+        echo "<td>" . $row["type"] . "</td>";
+        echo "<td>" . $row["amount"] . "</td>";
+        echo "<td>" . $row["account_id"] . "</td>";
+        echo "</tr>";
+    }
+    echo "</table>";
+} else {
+    echo "No results found";
 }
 ?>

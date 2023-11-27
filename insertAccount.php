@@ -53,7 +53,7 @@
 
 
 <?php
-include 'index.php';
+include 'cnx.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -62,17 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $balance = $_POST['balance'];
     $user_id = $_POST['user_id'];
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "cih_bank";
-
-    $conn = new mysqli($servername, $username, $password, $database);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
+    
     $sql = "INSERT INTO account (rib, devise, balance, user_id) VALUES (?, ? , ? , ?)";
     $statement = $conn->prepare($sql);
     $statement->bind_param("ssdi", $rib, $devise, $balance, $user_id);
@@ -85,5 +75,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $conn->close();
+}
+
+$sql = "SELECT * FROM account";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    echo "<table>";
+    echo "<tr>";
+    echo "<th>Id</th>";
+    echo "<th>rib</th>";
+    echo "<th>devise</th>";
+    echo "<th>balance</th>";
+    echo "<th>user_id</th>";
+    echo "</tr>";
+
+    while ($row = $result->fetch_assoc()) {
+        echo "<tr>";
+        echo "<td>" . $row["id"] . "</td>";
+        echo "<td>" . $row["rib"] . "</td>";
+        echo "<td>" . $row["devise"] . "</td>";
+        echo "<td>" . $row["balance"] . "</td>";
+        echo "<td>" . $row["user_id"] . "</td>";
+        echo "</tr>";
+    }
+    echo "</table>";
+} else {
+    echo "No results found";
 }
 ?>

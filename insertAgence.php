@@ -53,7 +53,7 @@
 
 
 <?php
-include 'index.php';
+include 'cnx.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -62,16 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $adresse = $_POST['adresse'];
     $bank_id = $_POST['bank_id'];
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "cih_bank";
-
-    $conn = new mysqli($servername, $username, $password, $database);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+   
 
     $sql = "INSERT INTO agence (longitude, latitude, adresse, bank_id) VALUES (?, ?, ?, ?)";
     $statement = $conn->prepare($sql);
@@ -84,5 +75,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $conn->close();
+}
+
+$sql = "SELECT * FROM agence";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    echo "<table>";
+    echo "<tr>";
+    echo "<th>Id</th>";
+    echo "<th>Longitude</th>";
+    echo "<th>Latitude</th>";
+    echo "<th>Adresse</th>";
+    echo "<th>bank_id</th>";
+    echo "</tr>";
+
+    while ($row = $result->fetch_assoc()) {
+        echo "<tr>";
+        echo "<td>" . $row["id"] . "</td>";
+        echo "<td>" . $row["longitude"] . "</td>";
+        echo "<td>" . $row["latitude"] . "</td>";
+        echo "<td>" . $row["adresse"] . "</td>";
+        echo "<td>" . $row["bank_id"] . "</td>";
+        echo "</tr>";
+    }
+    echo "</table>";
+} else {
+    echo "No results found";
 }
 ?>

@@ -55,7 +55,7 @@
 
 
 <?php
-include 'index.php';
+include 'cnx.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -66,17 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $telephone = $_POST['telephone'];
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "cih_bank";
-
-    $conn = new mysqli($servername, $username, $password, $database);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
+   
     $sql = "INSERT INTO adresse (ville, quartier, rue, code_postal, email, telephone) VALUES (?, ? , ? , ?, ?, ?)";
     $statement = $conn->prepare($sql);
     $statement->bind_param("sssssi", $ville, $quartier, $rue, $code_postal, $email, $telephone);
@@ -88,5 +78,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $conn->close();
+}
+
+$sql = "SELECT * FROM adresse";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    echo "<table>";
+    echo "<tr>";
+    echo "<th>Id</th>";
+    echo "<th>ville</th>";
+    echo "<th>quartier</th>";
+    echo "<th>rue</th>";
+    echo "<th>code_postal</th>";
+    echo "<th>email</th>";
+    echo "<th>telephone</th>";
+    echo "</tr>";
+
+    while ($row = $result->fetch_assoc()) {
+        echo "<tr>";
+        echo "<td>" . $row["id"] . "</td>";
+        echo "<td>" . $row["ville"] . "</td>";
+        echo "<td>" . $row["quartier"] . "</td>";
+        echo "<td>" . $row["rue"] . "</td>";
+        echo "<td>" . $row["code_postal"] . "</td>";
+        echo "<td>" . $row["email"] . "</td>";
+        echo "<td>" . $row["telephone"] . "</td>";
+        echo "</tr>";
+    }
+    echo "</table>";
+} else {
+    echo "No results found";
 }
 ?>
