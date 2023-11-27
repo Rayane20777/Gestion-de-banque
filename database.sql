@@ -40,20 +40,22 @@ CREATE TABLE distributeur (
 );
 
 -- User Table
-CREATE TABLE user (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    usersnames VARCHAR(50) UNIQUE,
-    passwords VARCHAR(255),
-    adresse_id INT,
-    FOREIGN KEY (adresse_id) REFERENCES adresse(id)
-);
-
--- Role Table
 CREATE TABLE role (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50) UNIQUE
 );
 
+CREATE TABLE user (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) UNIQUE,
+    password VARCHAR(255),
+    adresse_id INT,
+    agence_id INT,
+    role_id INT,
+    FOREIGN KEY (adresse_id) REFERENCES adresse(id),
+    FOREIGN KEY (agence_id) REFERENCES agence(id),
+    FOREIGN KEY (role_id) REFERENCES role(id)
+);
 
 -- Account Table
 CREATE TABLE account (
@@ -73,3 +75,5 @@ CREATE TABLE transaction (
     account_id INT,
     FOREIGN KEY (account_id) REFERENCES account(id)
 );
+
+
