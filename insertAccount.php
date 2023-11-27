@@ -35,19 +35,15 @@
 
         <section id="add" class="mt-20 mx-auto max-w-7xl py-6 sm:px-6 lg:px-8 ">
     <form action="insertAccount.php" method="post" class="grid gap-4 grid-cols-2 border-b-4 border-gray-600 pb-4">
-        <label for="rib" class="mb-2 block">Rib:</label>
-        <input type="text" id="rib" name="rib" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
+        <input type="text" id="rib" name="rib" placeholder="rib" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
 
-        <label for="devise" class="mb-2 block">Devise:</label>
-        <input type="text" id="devise" name="devise" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
+        <input type="text" id="devise" name="devise" placeholder="devide" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
 
-        <label for="balance" class="mb-2 block">Balance:</label>
-        <input type="number" id="balance" name="balance" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
+        <input type="number" id="balance" name="balance" placeholder="balance" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
 
-        <label for="user_id" class="mb-2 block">User_id:</label>
-        <input type="number" id="user_id" name="user_id" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
+        <input type="number" id="user_id" name="user_id" placeholder="user_id" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
 
-        <input type="submit" value="Insert Account" class="bg-gray-600 text-white text-xl rounded">
+        <input type="submit" value="Insert Account"  class="bg-gray-600 text-white text-xl rounded">
     </form>
     </section>
 </body>

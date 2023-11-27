@@ -34,23 +34,17 @@
 
         <section id="add" class="mt-20 mx-auto max-w-7xl py-6 sm:px-6 lg:px-8 ">
     <form action="insertAdresse.php" method="post" class="grid gap-4 grid-cols-2 border-b-4 border-gray-600 pb-4">
-        <label for="ville" class="mb-2 block">Ville:</label>
-        <input type="text" id="ville" name="ville" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
+        <input type="text" id="ville" name="ville" placeholder="ville" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
 
-        <label for="quartier" class="mb-2 block">Quartier:</label>
-        <input type="text" id="quartier" name="quartier" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
+        <input type="text" id="quartier" name="quartier" placeholder="quartier" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
 
-        <label for="rue" class="mb-2 block">Rue:</label>
-        <input type="text" id="rue" name="rue" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
+        <input type="text" id="rue" name="rue" placeholder="rue" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
 
-        <label for="code_postal" class="mb-2 block">Code postal:</label>
-        <input type="text" id="code_postal" name="code_postal" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
+        <input type="text" id="code_postal" name="code_postal" placeholder="code_postale" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
 
-        <label for="email" class="mb-2 block">Email:</label>
-        <input type="email" id="email" name="email" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
+        <input type="email" id="email" name="email" placeholder="email" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
 
-        <label for="telephone" class="mb-2 block">Telephone:</label>
-        <input type="tel" id="telephone" name="telephone" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
+        <input type="tel" id="telephone" name="telephone" placeholder="telephone" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
 
         <input type="submit" value="Insert Adresse" class="bg-gray-600 text-white text-xl rounded">
     </form>

@@ -37,16 +37,15 @@
 
         <section id="add" class="mt-20 mx-auto max-w-7xl py-6 sm:px-6 lg:px-8 ">
             <form action="insertTransaction.php" method="post" class="grid gap-4 grid-cols-2 border-b-4 border-gray-600 pb-4">
-                <label for="type" class="mb-2 block">Type:</label>
                 <select name="type" id="type" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
                     <option value="credit">Credit</option>
                     <option value="debit">Debit</option>
                 </select>
 
 
-                <input type="number" id="amount" name="amount" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
+                <input type="number" id="amount" name="amount" placeholder="alount" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
 
-                <input type="text" id="account_id" name="account_id" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
+                <input type="text" id="account_id" name="account_id" placeholder="account_id" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
 
                 <input type="submit" value="Insert Transaction" class="bg-gray-600 text-white text-xl rounded">
             </form>
