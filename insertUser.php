@@ -62,58 +62,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $passwords = $_POST['passwords'];
     $adresse_id = $_POST['adresse_id'];
 
-
-
-    $sql = "INSERT INTO user (usersnames , passwords, adresse_id) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO user (usersnames, passwords, adresse_id) VALUES (?,?,?)";
     $statement = $conn->prepare($sql);
     $statement->bind_param("ssi", $usersnames, $passwords, $adresse_id);
-
     if ($statement->execute() === TRUE) {
-        echo "New user created successfully";
+        echo "New user hAs benn added";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error" . $sql . $conn->error;
     }
-
-
 }
 
-    $sql = "SELECT * FROM user";
-    $result = $conn->query($sql);
+$sql = "SELECT * FROM user";
+$result = $conn->query($sql);
 
-    if ($result->num_rows > 0) {
-        echo "<div class='w-full overflow-hidden rounded-lg shadow p-4'>";
-        echo "<table class='min-w-full text-left text-sm font-light'>";
-        echo "<thead class='border-b font-medium dark:border-neutral-500'>";
+if ($result->num_rows > 0) {
+    echo "<div class='w-full overflow-hidden rounded-lg shadow p-4'>";
+    echo "<table class='min-w-full text-left text-sm font-light'>";
+    echo "<thead class='border-b font-medium dark:border-neutral-500'>";
+    echo "<tr>";
+    echo "<th scope='col' class='px-6 py-4'>#</th>";
+    echo "<th scope='col' class='px-6 py-4'>UserName</th>";
+    echo "<th scope='col' class='px-6 py-4'>Password</th>";
+    echo "<th scope='col' class='px-6 py-4'>Address Id</th>";
+    echo "<th scope='col' class='px-6 py-4'>Role</th>";
+    echo "<th scope='col' class='px-6 py-4'>Action</th>";
+    echo "</tr>";
+    echo "</thead>";
+    echo "<tbody class='bg-white'>";
+
+    while ($row = $result->fetch_assoc()) {
         echo "<tr>";
-        echo "<th scope='col' class='px-6 py-4'>#</th>";
-        echo "<th scope='col' class='px-6 py-4'>UserName</th>";
-        echo "<th scope='col' class='px-6 py-4'>Password</th>";
-        echo "<th scope='col' class='px-6 py-4'>Address Id</th>";
-        echo "<th scope='col' class='px-6 py-4'>Role</th>";
-        echo "<th scope='col' class='px-6 py-4'>Action</th>";
+        echo "<td class='whitespace-nowrap px-6 py-4 font-medium'>" . $row["id"] . "</td>";
+        echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["usersnames"] . "</td>";
+        echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["passwords"] . "</td>";
+        echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["adresse_id"] . "</td>";
+        echo "<td class='whitespace-nowrap px-6 py-4'>Admin</td>";
+        echo "<td class='whitespace-nowrap px-6 py-4'>";
+        echo "<button class='bg-blue-600 py-2 px-8 text-white font-bold'>Edit</button>";
+        echo "<button class='bg-red-600 py-2 px-8 text-white font-bold'>Remove</button>";
+        echo "</td>";
         echo "</tr>";
-        echo "</thead>";
-        echo "<tbody class='bg-white'>";
-
-        while ($row = $result->fetch_assoc()) {
-            echo "<tr>";
-            echo "<td class='whitespace-nowrap px-6 py-4 font-medium'>" . $row["id"] . "</td>";
-            echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["usersnames"] . "</td>";
-            echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["passwords"] . "</td>";
-            echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["adresse_id"] . "</td>";
-            echo "<td class='whitespace-nowrap px-6 py-4'>Admin</td>";
-            echo "<td class='whitespace-nowrap px-6 py-4'>";
-            echo "<button class='bg-blue-600 py-2 px-8 text-white font-bold'>Edit</button>";
-            echo "<button class='bg-red-600 py-2 px-8 text-white font-bold'>Remove</button>";
-            echo "</td>";
-            echo "</tr>";
-        }
-        echo "</tbody>";
-        echo "</table>";
-        echo "</div>";
-    } else {
-        echo "No results found";
     }
+    echo "</tbody>";
+    echo "</table>";
+    echo "</div>";
+} else {
+    echo "No results found";
+}
 
 
 
