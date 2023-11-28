@@ -1,8 +1,8 @@
 <?php
 include 'cnx.php';
 
-if (isset($_POST['edit_btn'])) {
-    $id = $_POST['edit_id'];
+if (isset($_POST['edit_role'])) {
+    $id = $_POST['edit_role'];
 
     // Fetch the role record based on the ID
     $selectRole = "SELECT * FROM role WHERE id = ?";
@@ -22,7 +22,7 @@ if (isset($_POST['edit_btn'])) {
 }
 
 
-
+// ************************************************************************************************************************
 
 if (isset($_POST['edit_account'])) {
     $id = $_POST['edit_account'];
@@ -56,6 +56,8 @@ if (isset($_POST['edit_account'])) {
     echo "</form>";
 }
 
+// ************************************************************************************************************************
+
 
 
 
@@ -84,6 +86,39 @@ if (isset($_POST['edit_adresse'])) {
 }
 
 
+// ************************************************************************************************************************
+
+
+
+
+if (isset($_POST['edit_agence'])) {
+    $id = $_POST['edit_agence'];
+
+    // Fetch the agence record based on the ID
+    $selectAgence = "SELECT * FROM agence WHERE id = ?";
+    $statement = $conn->prepare($selectAgence);
+    $statement->bind_param("i", $id);
+    $statement->execute();
+    $result = $statement->get_result();
+    $agence = $result->fetch_assoc();
+
+    // Now you can display a form with the agence details for editing
+    echo "<form action='insertAgence.php' method='post'>";
+    echo "<input type='hidden' name='update_id' value='" . $agence['id'] . "'>";
+    echo "<input type='text' id='updated_longitude' name='updated_longitude' placeholder='Updated Longitude' value='" . $agence['longitude'] . "' required>";
+    echo "<input type='text' id='updated_latitude' name='updated_latitude' placeholder='Updated Latitude' value='" . $agence['latitude'] . "' required>";
+    echo "<input type='text' id='updated_adresse' name='updated_adresse' placeholder='Updated Adresse' value='" . $agence['adresse'] . "' required>";
+    echo "<input type='text' id='updated_bank_id' name='updated_bank_id' placeholder='Updated Bank ID' value='" . $agence['bank_id'] . "' required>";
+    echo "<input type='submit' name='update' value='Update'>";
+    echo "</form>";
+}
+
+
+
+
+// ************************************************************************************************************************
+
+
 if (isset($_POST['edit_btn'])) {
     $id = $_POST['edit_id'];
 
@@ -126,86 +161,8 @@ if (isset($_POST['edit_btn'])) {
 }
 
 
-if (isset($_POST['edit_btn'])) {
-    $id = $_POST['edit_id'];
-
-    // Fetch the role record based on the ID
-    $selectRole = "SELECT * FROM role WHERE id = ?";
-    $statement = $conn->prepare($selectRole);
-    $statement->bind_param("i", $id);
-    $statement->execute();
-    $result = $statement->get_result();
-    $role = $result->fetch_assoc();
-    
-    // Now you can display a form with the role details for editing
-    echo "<form action='insertRole.php' method='post'>";
-    echo "<input type='hidden' name='update_id' value='" . $role['id'] . "'>";
-    echo "<input type='text' name='updated_name' value='" . $role['name'] . "' required>";
-    echo "<input type='submit' name='update' value='Update'>";
-    echo "</form>";
-
-}
 
 
-if (isset($_POST['edit_btn'])) {
-    $id = $_POST['edit_id'];
-
-    // Fetch the role record based on the ID
-    $selectRole = "SELECT * FROM role WHERE id = ?";
-    $statement = $conn->prepare($selectRole);
-    $statement->bind_param("i", $id);
-    $statement->execute();
-    $result = $statement->get_result();
-    $role = $result->fetch_assoc();
-    
-    // Now you can display a form with the role details for editing
-    echo "<form action='insertRole.php' method='post'>";
-    echo "<input type='hidden' name='update_id' value='" . $role['id'] . "'>";
-    echo "<input type='text' name='updated_name' value='" . $role['name'] . "' required>";
-    echo "<input type='submit' name='update' value='Update'>";
-    echo "</form>";
-
-}
 
 
-if (isset($_POST['edit_btn'])) {
-    $id = $_POST['edit_id'];
-
-    // Fetch the role record based on the ID
-    $selectRole = "SELECT * FROM role WHERE id = ?";
-    $statement = $conn->prepare($selectRole);
-    $statement->bind_param("i", $id);
-    $statement->execute();
-    $result = $statement->get_result();
-    $role = $result->fetch_assoc();
-    
-    // Now you can display a form with the role details for editing
-    echo "<form action='insertRole.php' method='post'>";
-    echo "<input type='hidden' name='update_id' value='" . $role['id'] . "'>";
-    echo "<input type='text' name='updated_name' value='" . $role['name'] . "' required>";
-    echo "<input type='submit' name='update' value='Update'>";
-    echo "</form>";
-
-}
-
-
-if (isset($_POST['edit_btn'])) {
-    $id = $_POST['edit_id'];
-
-    // Fetch the role record based on the ID
-    $selectRole = "SELECT * FROM role WHERE id = ?";
-    $statement = $conn->prepare($selectRole);
-    $statement->bind_param("i", $id);
-    $statement->execute();
-    $result = $statement->get_result();
-    $role = $result->fetch_assoc();
-    
-    // Now you can display a form with the role details for editing
-    echo "<form action='insertRole.php' method='post'>";
-    echo "<input type='hidden' name='update_id' value='" . $role['id'] . "'>";
-    echo "<input type='text' name='updated_name' value='" . $role['name'] . "' required>";
-    echo "<input type='submit' name='update' value='Update'>";
-    echo "</form>";
-
-}
 ?>

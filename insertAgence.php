@@ -103,7 +103,7 @@ if ($result->num_rows > 0) {
         echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["bank_id"] . "</td>";
         echo "<td class='whitespace-nowrap px-6 py-4'>";
         echo "<form method='post' action='edit.php'>";
-        echo "<input type='hidden' name='edit_id' value='" . $row['id'] . "'>";
+        echo "<input type='hidden' name='edit_agence' value='" . $row['id'] . "'>";
         echo "<button type='submit' name='edit_btn' class='bg-blue-600 py-2 px-8 text-white font-bold'>Edit</button>";
         echo "</form>";
         echo "</td>";
@@ -142,17 +142,20 @@ if (isset($_POST['delete_btn'])) {
 
 if (isset($_POST['update'])) {
     $id = $_POST['update_id'];
-    $updatedName = $_POST['updated_name'];
+    $updatedLongitude = $_POST['updated_longitude'];
+    $updatedLatitude = $_POST['updated_latitude'];
+    $updatedAdresse = $_POST['updated_adresse'];
+    $updatedBankId = $_POST['updated_bank_id'];
 
-    // Update the role record
-    $updateRole = "UPDATE role SET name = ? WHERE id = ?";
-    $statement = $conn->prepare($updateRole);
-    $statement->bind_param("si", $updatedName, $id);
+    // Update the agence record
+    $updateAgence = "UPDATE agence SET longitude = ?, latitude = ?, adresse = ?, bank_id = ? WHERE id = ?";
+    $statement = $conn->prepare($updateAgence);
+    $statement->bind_param("ddssi", $updatedLongitude, $updatedLatitude, $updatedAdresse, $updatedBankId, $id);
 
     if ($statement->execute()) {
-        echo "Role with ID $id has been updated successfully";
+        echo "Agence with ID $id has been updated successfully";
     } else {
-        echo "Error updating role: " . $statement->error;
+        echo "Error updating agence: " . $statement->error;
     }
 
     $statement->close();
