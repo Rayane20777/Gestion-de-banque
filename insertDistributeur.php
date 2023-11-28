@@ -132,7 +132,7 @@ if ($result->num_rows > 0) {
 if (isset($_POST['delete_btn'])) {
     $id = $_POST['delete_id'];
 
-    // Delete the record from the 'user' table
+    // Delete the record from the 'distributeur' table
     $deleteDistributeur = "DELETE FROM distributeur WHERE id = ?";
     $statement = $conn->prepare($deleteDistributeur);
     $statement->bind_param("i", $id);
@@ -146,19 +146,23 @@ if (isset($_POST['delete_btn'])) {
     $statement->close();
 }
 
-if (isset($_POST['update'])) {
+// Handle update
+if (isset($_POST['update_btn'])) {
     $id = $_POST['update_id'];
-    $updatedName = $_POST['updated_name'];
+    $updatedLongitude = $_POST['updated_longitude'];
+    $updatedLatitude = $_POST['updated_latitude'];
+    $updatedAdresse = $_POST['updated_adresse'];
+    $updatedAgenceId = $_POST['updated_agence_id'];
 
-    // Update the role record
-    $updateRole = "UPDATE role SET name = ? WHERE id = ?";
-    $statement = $conn->prepare($updateRole);
-    $statement->bind_param("si", $updatedName, $id);
+    // Update the distributeur record
+    $updateDistributeur = "UPDATE distributeur SET longitude = ?, latitude = ?, adresse = ?, agence_id = ? WHERE id = ?";
+    $statement = $conn->prepare($updateDistributeur);
+    $statement->bind_param("ddssi", $updatedLongitude, $updatedLatitude, $updatedAdresse, $updatedAgenceId, $id);
 
     if ($statement->execute()) {
-        echo "Role with ID $id has been updated successfully";
+        echo "Distributeur with ID $id has been updated successfully";
     } else {
-        echo "Error updating role: " . $statement->error;
+        echo "Error updating Distributeur: " . $statement->error;
     }
 
     $statement->close();
