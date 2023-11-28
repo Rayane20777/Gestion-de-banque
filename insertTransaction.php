@@ -106,7 +106,7 @@ if ($result->num_rows > 0) {
         echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["account_id"] . "</td>";
         echo "<td class='whitespace-nowrap px-6 py-4'>";
         echo "<form method='post' action='edit.php'>";
-        echo "<input type='hidden' name='edit_id' value='" . $row['id'] . "'>";
+        echo "<input type='hidden' name='edit_transaction' value='" . $row['id'] . "'>";
         echo "<button type='submit' name='edit_btn' class='bg-blue-600 py-2 px-8 text-white font-bold'>Edit</button>";
         echo "</form>";
         echo "</td>";
@@ -147,18 +147,19 @@ if (isset($_POST['update'])) {
     $id = $_POST['update_id'];
     $updatedName = $_POST['updated_name'];
 
-    // Update the role record
-    $updateRole = "UPDATE role SET name = ? WHERE id = ?";
-    $statement = $conn->prepare($updateRole);
-    $statement->bind_param("si", $updatedName, $id);
+    // Update the transaction record
+    $updateTransaction = "UPDATE transaction SET type = ?, amount = ?, account_id = ? WHERE id = ?";
+    $statement = $conn->prepare($updateTransaction);
+    $statement->bind_param("sdi", $updatedType, $updatedAmount, $updatedAccountID, $id);
 
     if ($statement->execute()) {
-        echo "Role with ID $id has been updated successfully";
+        echo "Transaction with ID $id has been updated successfully";
     } else {
-        echo "Error updating role: " . $statement->error;
+        echo "Error updating transaction: " . $statement->error;
     }
 
     $statement->close();
 }
+
 
 ?>

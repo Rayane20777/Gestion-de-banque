@@ -68,7 +68,8 @@ if (isset($_POST['insert'])) {
     $statement = $conn->prepare($sql);
 
     if ($statement) {
-        $statement->bind_param("ssi", $usersnames, $passwords, $adresse_id);
+        $hashedPassword = password_hash($passwords, PASSWORD_BCRYPT);
+        $statement->bind_param("ssi", $usersnames, $hashedPassword, $adresse_id);
         if ($statement->execute() === TRUE) {
             echo "<p class='text-blue-500 font-bold'>New user has been added</p>";
         } else {

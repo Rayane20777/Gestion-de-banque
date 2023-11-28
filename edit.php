@@ -144,7 +144,6 @@ if (isset($_POST['edit_bank'])) {
 
 
 
-include 'cnx.php';
 
 if (isset($_POST['edit_distributeur'])) {
     $id = $_POST['edit_distributeur'];
@@ -169,6 +168,36 @@ if (isset($_POST['edit_distributeur'])) {
 }
 
 
+// ************************************************************************************************************************
+
+
+
+if (isset($_POST['edit_transaction'])) {
+    $id = $_POST['edit_transaction'];
+
+    // Fetch the transaction record based on the ID
+    $selectTransaction = "SELECT * FROM transaction WHERE id = ?";
+    $statement = $conn->prepare($selectTransaction);
+    $statement->bind_param("i", $id);
+    $statement->execute();
+    $result = $statement->get_result();
+    $transaction = $result->fetch_assoc();
+    
+    // Now you can display a form with the transaction details for editing
+    echo "<form action='insertTransaction.php' method='post'>";
+    echo "<input type='hidden' name='update_id' value='" . $transaction['id'] . "'>";
+    echo "<select name='updated_type' required>";
+    echo "<option value='credit' " . ($transaction['type'] == 'credit' ? 'selected' : '') . ">Credit</option>";
+    echo "<option value='debit' " . ($transaction['type'] == 'debit' ? 'selected' : '') . ">Debit</option>";
+    echo "</select>";
+    echo "<input type='number' name='updated_amount' value='" . $transaction['amount'] . "' required>";
+    echo "<input type='text' name='updated_account_id' value='" . $transaction['account_id'] . "' required>";
+    echo "<input type='submit' name='update' value='Update'>";
+    echo "</form>";
+}
+
+
+// ************************************************************************************************************************
 
 
 
