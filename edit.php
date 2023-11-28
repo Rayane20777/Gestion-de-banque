@@ -11,14 +11,13 @@ if (isset($_POST['edit_role'])) {
     $statement->execute();
     $result = $statement->get_result();
     $role = $result->fetch_assoc();
-    
+
     // Now you can display a form with the role details for editing
     echo "<form action='insertRole.php' method='post'>";
     echo "<input type='hidden' name='update_id' value='" . $role['id'] . "'>";
     echo "<input type='text' name='updated_name' value='" . $role['name'] . "' required>";
     echo "<input type='submit' name='update' value='Update'>";
     echo "</form>";
-
 }
 
 
@@ -182,7 +181,7 @@ if (isset($_POST['edit_transaction'])) {
     $statement->execute();
     $result = $statement->get_result();
     $transaction = $result->fetch_assoc();
-    
+
     // Now you can display a form with the transaction details for editing
     echo "<form action='insertTransaction.php' method='post'>";
     echo "<input type='hidden' name='update_id' value='" . $transaction['id'] . "'>";
@@ -203,4 +202,23 @@ if (isset($_POST['edit_transaction'])) {
 
 
 
-?>
+if (isset($_POST['edit_user'])) {
+    $id = $_POST['edit_user'];
+
+    // Fetch the user record based on the ID
+    $selectUser = "SELECT * FROM user WHERE id = ?";
+    $statement = $conn->prepare($selectUser);
+    $statement->bind_param("i", $id);
+    $statement->execute();
+    $result = $statement->get_result();
+    $user = $result->fetch_assoc();
+
+    // Now you can display a form with the user details for editing
+    echo "<form action='insertUser.php' method='post'>";
+    echo "<input type='hidden' name='update_id' value='" . $user['id'] . "'>";
+    echo "<input type='text' name='updated_usersnames' placeholder='User Name' value='" . $user['usersnames'] . "' required>";
+    echo "<input type='password' name='updated_passwords' placeholder='User Password'>";
+    echo "<input type='number' name='updated_adresse_id' placeholder='Id-Adresse' value='" . $user['adresse_id'] . "' required>";
+    echo "<input type='submit' name='update' value='Update'>";
+    echo "</form>";
+}

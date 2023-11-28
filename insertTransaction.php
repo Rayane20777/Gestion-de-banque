@@ -145,7 +145,9 @@ if (isset($_POST['delete_btn'])) {
 
 if (isset($_POST['update'])) {
     $id = $_POST['update_id'];
-    $updatedName = $_POST['updated_name'];
+    $updatedType = $_POST['update_type'];
+    $updatedAmount = $_POST['update_amount'];
+    $updatedAccountID = $_POST['update_account_id'];
 
     // Update the transaction record
     $updateTransaction = "UPDATE transaction SET type = ?, amount = ?, account_id = ? WHERE id = ?";
@@ -160,6 +162,7 @@ if (isset($_POST['update'])) {
 
     $statement->close();
 }
+
 
 
 ?>
