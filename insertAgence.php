@@ -113,4 +113,22 @@ if ($result->num_rows > 0) {
 } else {
     echo "No results found";
 }
+
+// Handle deletion
+if (isset($_POST['delete_btn'])) {
+    $id = $_POST['delete_id'];
+
+    // Delete the record from the 'user' table
+    $deleteAgence = "DELETE FROM agence WHERE id = ?";
+    $statement = $conn->prepare($deleteAgence);
+    $statement->bind_param("i", $id);
+
+    if ($statement->execute()) {
+        echo "<p class='text-green-500 font-bold'>Agence with ID $id has been deleted</p>";
+    } else {
+        echo "<p class='text-red-500 font-bold'>Error deleting agence: " . $statement->error . "</p>";
+    }
+
+    $statement->close();
+}
 ?>

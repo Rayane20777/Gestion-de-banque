@@ -98,4 +98,22 @@ if ($result->num_rows > 0) {
 } else {
     echo "No results found";
 }
+
+// Handle deletion
+if (isset($_POST['delete_btn'])) {
+    $id = $_POST['delete_id'];
+
+    // Delete the record from the 'user' table
+    $deleteRole = "DELETE FROM role WHERE id = ?";
+    $statement = $conn->prepare($deleteRole);
+    $statement->bind_param("i", $id);
+
+    if ($statement->execute()) {
+        echo "<p class='text-green-500 font-bold'>Role with ID $id has been deleted</p>";
+    } else {
+        echo "<p class='text-red-500 font-bold'>Error deleting user: " . $statement->error . "</p>";
+    }
+
+    $statement->close();
+}
 ?>
