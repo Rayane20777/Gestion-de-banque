@@ -43,7 +43,7 @@
 
                 <input type="number" id="adresse_id" name="adresse_id" placeholder="Id-Adresse" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6" required>
 
-                <input type="submit" value="Insert User" class="bg-gray-600 text-white text-xl rounded">
+                <input type="submit" name="insert" value="Insert User" class="bg-gray-600 text-white text-xl rounded">
             </form>
         </section>
 </body>
@@ -53,22 +53,30 @@
 
 
 
+
+
+
 <?php
 include 'cnx.php';
 
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $usersnames = $_POST['usersnames'];
-    $passwords = $_POST['passwords'];
-    $adresse_id = $_POST['adresse_id'];
+if (isset($_POST['inser'])) {
+    $usersnames = isset($_POST['usersnames']) ? $_POST['usersnames'] : null;
+    $passwords = isset($_POST['passwords']) ? $_POST['passwords'] : null;
+    $adresse_id = isset($_POST['adresse_id']) ? $_POST['adresse_id'] : null;
 
     $sql = "INSERT INTO user (usersnames, passwords, adresse_id) VALUES (?,?,?)";
     $statement = $conn->prepare($sql);
-    $statement->bind_param("ssi", $usersnames, $passwords, $adresse_id);
-    if ($statement->execute() === TRUE) {
-        echo "New user hAs benn added";
+
+    if ($statement) {
+        $statement->bind_param("ssi", $usersnames, $passwords, $adresse_id);
+        if ($statement->execute() === TRUE) {
+            echo "<p class='text-blue-500 font-bold'>New user has been added</p>";
+        } else {
+            echo "<p class='text-red-500 font-bold'>Error: " . $sql . $conn->error . "</p>";
+        }
+
     } else {
-        echo "Error" . $sql . $conn->error;
+        echo "<p class='text-red-500 font-bold'>Error preparing statement</p>";
     }
 }
 
@@ -77,10 +85,10 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     echo "<div class='w-full overflow-hidden rounded-lg shadow p-4'>";
-    echo "<table class='min-w-full text-left text-sm font-light'>";
+    echo "<table class='table min-w-full text-left text-sm font-light'>";
     echo "<thead class='border-b font-medium dark:border-neutral-500'>";
     echo "<tr>";
-    echo "<th scope='col' class='px-6 py-4'>#</th>";
+    echo "<th scope='col' class='px-6 py-4'>Id</th>";
     echo "<th scope='col' class='px-6 py-4'>UserName</th>";
     echo "<th scope='col' class='px-6 py-4'>Password</th>";
     echo "<th scope='col' class='px-6 py-4'>Address Id</th>";
@@ -96,10 +104,14 @@ if ($result->num_rows > 0) {
         echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["usersnames"] . "</td>";
         echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["passwords"] . "</td>";
         echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["adresse_id"] . "</td>";
-        echo "<td class='whitespace-nowrap px-6 py-4'>Admin</td>";
         echo "<td class='whitespace-nowrap px-6 py-4'>";
         echo "<button class='bg-blue-600 py-2 px-8 text-white font-bold'>Edit</button>";
-        echo "<button class='bg-red-600 py-2 px-8 text-white font-bold'>Delete</button>";
+        echo "<td>";
+        echo "<form method='post' action='insertUser.php'>";
+        echo "<input type='hidden' name='delete_id' value='" . $row['id'] . "'>";
+        echo "<button type='submit' name='delete_btn' class='bg-red-600 py-2 px-8 text-white font-bold'>Delete</button>";
+        echo "</form>";
+        echo "</td>";
         echo "</td>";
         echo "</tr>";
     }
@@ -107,11 +119,25 @@ if ($result->num_rows > 0) {
     echo "</table>";
     echo "</div>";
 } else {
-    echo "No results found";
+    echo "<p class='text-gray-500'>No results found</p>";
 }
 
+// Handle deletion
+if (isset($_POST['delete_btn'])) {
+    $id = $_POST['delete_id'];
 
+    // Delete the record from the 'user' table
+    $deleteUser = "DELETE FROM user WHERE id = ?";
+    $statement = $conn->prepare($deleteUser);
+    $statement->bind_param("i", $id);
 
+    if ($statement->execute()) {
+        echo "<p class='text-green-500 font-bold'>User with ID $id has been deleted</p>";
+    } else {
+        echo "<p class='text-red-500 font-bold'>Error deleting user: " . $statement->error . "</p>";
+    }
 
+    $statement->close();
+}
 
 ?>
