@@ -219,6 +219,8 @@ if (isset($_POST['edit_user'])) {
     echo "<input type='text' name='updated_usersnames' placeholder='User Name' value='" . $user['usersnames'] . "' required>";
     echo "<input type='password' name='updated_passwords' placeholder='User Password'>";
     echo "<input type='number' name='updated_adresse_id' placeholder='Id-Adresse' value='" . $user['adresse_id'] . "' required>";
+    echo "<input type='number' name='updated_agence_id' placeholder='Id-agence' value='" . $user['agence_id'] . "' required>";
+    echo "<input type='number' name='updated_role_id' placeholder='Id-role' value='" . $user['role_id'] . "' required>";
     echo "<input type='submit' name='update' value='Update'>";
     echo "</form>";
 }

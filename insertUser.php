@@ -43,6 +43,10 @@
 
                 <input type="number" id="adresse_id" name="adresse_id" placeholder="Id-Adresse" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6" required>
 
+                <input type="number" id="agence_id" name="agence_id" placeholder="Id-agence" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6" required>
+
+                <input type="number" id="role_id" name="role_id" placeholder="Id-role" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6" required>
+
                 <input type="submit" name="insert" value="Insert User" class="bg-gray-600 text-white text-xl rounded">
             </form>
         </section>
@@ -63,13 +67,15 @@ if (isset($_POST['insert'])) {
     $usersnames = isset($_POST['usersnames']) ? $_POST['usersnames'] : null;
     $passwords = isset($_POST['passwords']) ? $_POST['passwords'] : null;
     $adresse_id = isset($_POST['adresse_id']) ? $_POST['adresse_id'] : null;
+    $agence_id = isset($_POST['agence_id']) ? $_POST['agence_id'] : null;
+    $role_id = isset($_POST['role_id']) ? $_POST['role_id'] : null;
 
-    $sql = "INSERT INTO user (usersnames, passwords, adresse_id) VALUES (?,?,?)";
+    $sql = "INSERT INTO user (usersnames, passwords, adresse_id,agence_id,role_id) VALUES (?,?,?,?,?)";
     $statement = $conn->prepare($sql);
 
     if ($statement) {
         $hashedPassword = password_hash($passwords, PASSWORD_BCRYPT);
-        $statement->bind_param("ssi", $usersnames, $hashedPassword, $adresse_id);
+        $statement->bind_param("ssiii", $usersnames, $hashedPassword, $adresse_id,$agence_id,$role_id);
         if ($statement->execute() === TRUE) {
             echo "<p class='text-blue-500 font-bold'>New user has been added</p>";
         } else {
@@ -93,7 +99,8 @@ if ($result->num_rows > 0) {
     echo "<th scope='col' class='px-6 py-4'>UserName</th>";
     echo "<th scope='col' class='px-6 py-4'>Password</th>";
     echo "<th scope='col' class='px-6 py-4'>Address Id</th>";
-    echo "<th scope='col' class='px-6 py-4'>Role</th>";
+    echo "<th scope='col' class='px-6 py-4'>Agence Id</th>";
+    echo "<th scope='col' class='px-6 py-4'>Role Id</th>";
     echo "<th scope='col' class='px-6 py-4'>Action</th>";
     echo "</tr>";
     echo "</thead>";
@@ -105,6 +112,8 @@ if ($result->num_rows > 0) {
         echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["usersnames"] . "</td>";
         echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["passwords"] . "</td>";
         echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["adresse_id"] . "</td>";
+        echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["agence_id"] . "</td>";
+        echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["role_id"] . "</td>";
         echo "<td class='whitespace-nowrap px-6 py-4'>";
         echo "<form method='post' action='edit.php'>";
         echo "<input type='hidden' name='edit_user' value='" . $row['id'] . "'>";
@@ -148,13 +157,15 @@ if (isset($_POST['update'])) {
     $updatedUsersnames = $_POST['updated_usersnames'];
     $updatedPassword = isset($_POST['updated_passwords']) ? password_hash($_POST['updated_passwords'], PASSWORD_BCRYPT) : null;
     $updatedAdresseID = $_POST['updated_adresse_id'];
+    $updatedAgenceID = $_POST['updated_agence_id'];
+    $updatedRoleID = $_POST['updated_role_id'];
 
     // Update the user record
-    $updateUser = "UPDATE user SET usersnames = ?, passwords = IFNULL(?, passwords), adresse_id = ? WHERE id = ?";
+    $updateUser = "UPDATE user SET usersnames = ?, passwords = IFNULL(?, passwords), adresse_id = ?,agence_id = ?, role_id = ? WHERE id = ?";
     $statement = $conn->prepare($updateUser);
     
     if ($statement) {
-        $statement->bind_param("ssii", $updatedUsersnames, $updatedPassword, $updatedAdresseID, $id);
+        $statement->bind_param("ssiiii", $updatedUsersnames, $updatedPassword, $updatedAdresseID,$updatedAgenceID,$updatedRoleID, $id);
         
         if ($statement->execute()) {
             echo "User with ID $id has been updated successfully";
