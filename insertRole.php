@@ -71,19 +71,30 @@ $sql = "SELECT * FROM role";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    echo "<table>";
+    echo "<div class='w-full overflow-hidden rounded-lg shadow p-4'>";
+    echo "<table class='min-w-full text-left text-sm font-light'>";
+    echo "<thead class='border-b font-medium dark:border-neutral-500'>";
     echo "<tr>";
-    echo "<th>Id</th>";
-    echo "<th>name</th>";
+    echo "<th scope='col' class='px-6 py-4'>Id</th>";
+    echo "<th scope='col' class='px-6 py-4'>Name</th>";
+    echo "<th scope='col' class='px-6 py-4'>Action</th>";
     echo "</tr>";
+    echo "</thead>";
+    echo "<tbody class='bg-white'>";
 
     while ($row = $result->fetch_assoc()) {
         echo "<tr>";
-        echo "<td>" . $row["id"] . "</td>";
-        echo "<td>" . $row["name"] . "</td>";
+        echo "<td class='whitespace-nowrap px-6 py-4 font-medium'>" . $row["id"] . "</td>";
+        echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["name"] . "</td>";
+        echo "<td class='whitespace-nowrap px-6 py-4'>";
+        echo "<button class='bg-blue-600 py-2 px-8 text-white font-bold'>Edit</button>";
+        echo "<button class='bg-red-600 py-2 px-8 text-white font-bold'>Remove</button>";
+        echo "</td>";
         echo "</tr>";
     }
+    echo "</tbody>";
     echo "</table>";
+    echo "</div>";
 } else {
     echo "No results found";
 }

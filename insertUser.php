@@ -81,26 +81,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        echo "<table>";
+        echo "<div class='w-full overflow-hidden rounded-lg shadow p-4'>";
+        echo "<table class='min-w-full text-left text-sm font-light'>";
+        echo "<thead class='border-b font-medium dark:border-neutral-500'>";
         echo "<tr>";
-        echo "<th>Id</th>";
-        echo "<th>Usernames</th>";
-        echo "<th>Passwords</th>";
-        echo "<th>Adresse Id</th>";
+        echo "<th scope='col' class='px-6 py-4'>#</th>";
+        echo "<th scope='col' class='px-6 py-4'>UserName</th>";
+        echo "<th scope='col' class='px-6 py-4'>Password</th>";
+        echo "<th scope='col' class='px-6 py-4'>Address Id</th>";
+        echo "<th scope='col' class='px-6 py-4'>Role</th>";
+        echo "<th scope='col' class='px-6 py-4'>Action</th>";
         echo "</tr>";
+        echo "</thead>";
+        echo "<tbody class='bg-white'>";
 
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
-            echo "<td>" . $row["id"] . "</td>";
-            echo "<td>" . $row["usersnames"] . "</td>";
-            echo "<td>" . $row["passwords"] . "</td>";
-            echo "<td>" . $row["adresse_id"] . "</td>";
+            echo "<td class='whitespace-nowrap px-6 py-4 font-medium'>" . $row["id"] . "</td>";
+            echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["usersnames"] . "</td>";
+            echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["passwords"] . "</td>";
+            echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["adresse_id"] . "</td>";
+            echo "<td class='whitespace-nowrap px-6 py-4'>Admin</td>";
+            echo "<td class='whitespace-nowrap px-6 py-4'>";
+            echo "<button class='bg-blue-600 py-2 px-8 text-white font-bold'>Edit</button>";
+            echo "<button class='bg-red-600 py-2 px-8 text-white font-bold'>Remove</button>";
+            echo "</td>";
             echo "</tr>";
         }
+        echo "</tbody>";
         echo "</table>";
+        echo "</div>";
     } else {
         echo "No results found";
     }
+
+
 
 
 

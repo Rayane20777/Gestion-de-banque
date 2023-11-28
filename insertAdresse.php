@@ -83,30 +83,42 @@ $sql = "SELECT * FROM adresse";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    echo "<table>";
+    echo "<div class='w-full overflow-hidden rounded-lg shadow p-4'>";
+    echo "<table class='min-w-full text-left text-sm font-light'>";
+    echo "<thead class='border-b font-medium dark:border-neutral-500'>";
     echo "<tr>";
-    echo "<th>Id</th>";
-    echo "<th>ville</th>";
-    echo "<th>quartier</th>";
-    echo "<th>rue</th>";
-    echo "<th>code_postal</th>";
-    echo "<th>email</th>";
-    echo "<th>telephone</th>";
+    echo "<th scope='col' class='px-6 py-4'>ID</th>";
+    echo "<th scope='col' class='px-6 py-4'>City</th>";
+    echo "<th scope='col' class='px-6 py-4'>District</th>";
+    echo "<th scope='col' class='px-6 py-4'>Street</th>";
+    echo "<th scope='col' class='px-6 py-4'>Postal Code</th>";
+    echo "<th scope='col' class='px-6 py-4'>Email</th>";
+    echo "<th scope='col' class='px-6 py-4'>Phone Number</th>";
+    echo "<th scope='col' class='px-6 py-4'>Action</th>";
     echo "</tr>";
+    echo "</thead>";
+    echo "<tbody class='bg-white'>";
 
     while ($row = $result->fetch_assoc()) {
         echo "<tr>";
-        echo "<td>" . $row["id"] . "</td>";
-        echo "<td>" . $row["ville"] . "</td>";
-        echo "<td>" . $row["quartier"] . "</td>";
-        echo "<td>" . $row["rue"] . "</td>";
-        echo "<td>" . $row["code_postal"] . "</td>";
-        echo "<td>" . $row["email"] . "</td>";
-        echo "<td>" . $row["telephone"] . "</td>";
+        echo "<td class='whitespace-nowrap px-6 py-4 font-medium'>" . $row["id"] . "</td>";
+        echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["ville"] . "</td>";
+        echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["quartier"] . "</td>";
+        echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["rue"] . "</td>";
+        echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["code_postal"] . "</td>";
+        echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["email"] . "</td>";
+        echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["telephone"] . "</td>";
+        echo "<td class='whitespace-nowrap px-6 py-4'>";
+        echo "<button class='bg-blue-600 py-2 px-4 text-white font-bold'>Edit</button>";
+        echo "<button class='bg-red-600 py-2 px-4 text-white font-bold'>Delete</button>";
+        echo "</td>";
         echo "</tr>";
     }
+    echo "</tbody>";
     echo "</table>";
+    echo "</div>";
 } else {
     echo "No results found";
 }
+
 ?>

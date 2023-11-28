@@ -80,25 +80,36 @@ $sql = "SELECT * FROM agence";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    echo "<table>";
+    echo "<div class='w-full overflow-hidden rounded-lg shadow p-4'>";
+    echo "<table class='min-w-full text-left text-sm font-light'>";
+    echo "<thead class='border-b font-medium dark:border-neutral-500'>";
     echo "<tr>";
-    echo "<th>Id</th>";
-    echo "<th>Longitude</th>";
-    echo "<th>Latitude</th>";
-    echo "<th>Adresse</th>";
-    echo "<th>bank_id</th>";
+    echo "<th scope='col' class='px-6 py-4'>ID</th>";
+    echo "<th scope='col' class='px-6 py-4'>Longitude</th>";
+    echo "<th scope='col' class='px-6 py-4'>Latitude</th>";
+    echo "<th scope='col' class='px-6 py-4'>Address</th>";
+    echo "<th scope='col' class='px-6 py-4'>Bank ID</th>";
+    echo "<th scope='col' class='px-6 py-4'>Action</th>";
     echo "</tr>";
+    echo "</thead>";
+    echo "<tbody class='bg-white'>";
 
     while ($row = $result->fetch_assoc()) {
         echo "<tr>";
-        echo "<td>" . $row["id"] . "</td>";
-        echo "<td>" . $row["longitude"] . "</td>";
-        echo "<td>" . $row["latitude"] . "</td>";
-        echo "<td>" . $row["adresse"] . "</td>";
-        echo "<td>" . $row["bank_id"] . "</td>";
+        echo "<td class='whitespace-nowrap px-6 py-4 font-medium'>" . $row["id"] . "</td>";
+        echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["longitude"] . "</td>";
+        echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["latitude"] . "</td>";
+        echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["adresse"] . "</td>";
+        echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["bank_id"] . "</td>";
+        echo "<td class='whitespace-nowrap px-6 py-4'>";
+        echo "<button class='bg-blue-600 py-2 px-4 text-white font-bold'>Edit</button>";
+        echo "<button class='bg-red-600 py-2 px-4 text-white font-bold'>Delete</button>";
+        echo "</td>";
         echo "</tr>";
     }
+    echo "</tbody>";
     echo "</table>";
+    echo "</div>";
 } else {
     echo "No results found";
 }

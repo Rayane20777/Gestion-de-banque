@@ -47,8 +47,8 @@ CREATE TABLE role (
 
 CREATE TABLE user (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(50) UNIQUE,
-    password VARCHAR(255),
+    usersnames VARCHAR(50) UNIQUE,
+    passwords VARCHAR(255),
     adresse_id INT,
     agence_id INT,
     role_id INT,
