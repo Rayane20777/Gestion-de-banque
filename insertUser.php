@@ -105,8 +105,11 @@ if ($result->num_rows > 0) {
         echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["passwords"] . "</td>";
         echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["adresse_id"] . "</td>";
         echo "<td class='whitespace-nowrap px-6 py-4'>";
-        echo "<button class='bg-blue-600 py-2 px-8 text-white font-bold'>Edit</button>";
-        echo "<td>";
+        echo "<form method='post' action='editRole.php'>";
+        echo "<input type='hidden' name='edit_id' value='" . $row['id'] . "'>";
+        echo "<button type='submit' name='edit_btn' class='bg-blue-600 py-2 px-8 text-white font-bold'>Edit</button>";
+        echo "</form>";
+        echo "</td>";
         echo "<form method='post' action='insertUser.php'>";
         echo "<input type='hidden' name='delete_id' value='" . $row['id'] . "'>";
         echo "<button type='submit' name='delete_btn' class='bg-red-600 py-2 px-8 text-white font-bold'>Delete</button>";
@@ -135,6 +138,23 @@ if (isset($_POST['delete_btn'])) {
         echo "<p class='text-green-500 font-bold'>User with ID $id has been deleted</p>";
     } else {
         echo "<p class='text-red-500 font-bold'>Error deleting user: " . $statement->error . "</p>";
+    }
+
+}
+
+if (isset($_POST['update'])) {
+    $id = $_POST['update_id'];
+    $updatedName = $_POST['updated_name'];
+
+    // Update the role record
+    $updateRole = "UPDATE role SET name = ? WHERE id = ?";
+    $statement = $conn->prepare($updateRole);
+    $statement->bind_param("si", $updatedName, $id);
+
+    if ($statement->execute()) {
+        echo "Role with ID $id has been updated successfully";
+    } else {
+        echo "Error updating role: " . $statement->error;
     }
 
     $statement->close();
