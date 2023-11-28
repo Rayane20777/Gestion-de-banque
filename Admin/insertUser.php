@@ -1,3 +1,23 @@
+<?php
+session_start();
+include('../cnx.php');
+
+if (!isset($_SESSION['name']) || $_SESSION['user_type'] != 2) {
+    header("Location: ../Login.php");
+    exit;
+}
+
+if (isset($_POST['logout'])) {
+    session_unset(); 
+    session_destroy(); 
+    header('Location: ../Login.php');
+    exit();
+}
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,7 +81,7 @@
 
 
 <?php
-include 'cnx.php';
+include '../cnx.php';
 
 if (isset($_POST['insert'])) {
     $usersnames = isset($_POST['usersnames']) ? $_POST['usersnames'] : null;
