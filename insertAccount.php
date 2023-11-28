@@ -56,7 +56,7 @@
 include 'cnx.php';
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (isset($_POST['insert'])) {
     $rib = $_POST['rib'];
     $devise = $_POST['devise'];
     $balance = $_POST['balance'];

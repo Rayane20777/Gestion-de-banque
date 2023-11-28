@@ -58,7 +58,7 @@
 include 'cnx.php';
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (isset($_POST['insert'])) {
     $ville = $_POST['ville'];
     $quartier = $_POST['quartier'];
     $rue = $_POST['rue'];

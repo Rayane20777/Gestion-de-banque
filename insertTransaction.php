@@ -61,7 +61,7 @@
 include 'cnx.php';
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (isset($_POST['insert'])) {
     $type = $_POST['type'];
     $amount = $_POST['amount'];
     $account_id = $_POST['account_id'];

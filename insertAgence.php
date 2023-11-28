@@ -56,7 +56,7 @@
 include 'cnx.php';
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (isset($_POST['insert'])) {
     $longitude = $_POST['longitude'];
     $latitude = $_POST['latitude'];
     $adresse = $_POST['adresse'];
