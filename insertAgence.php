@@ -103,7 +103,7 @@ if ($result->num_rows > 0) {
         echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["bank_id"] . "</td>";
         echo "<td class='whitespace-nowrap px-6 py-4'>";
         echo "<button class='bg-blue-600 py-2 px-4 text-white font-bold'>Edit</button>";
-        echo "<button class='bg-red-600 py-2 px-4 text-white font-bold'>Delete</button>";
+        echo "<button type='submit' name='delete_btn' class='bg-red-600 py-2 px-8 text-white font-bold'>Delete</button>";
         echo "</td>";
         echo "</tr>";
     }
