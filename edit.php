@@ -144,6 +144,30 @@ if (isset($_POST['edit_bank'])) {
 
 
 
+include 'cnx.php';
+
+if (isset($_POST['edit_distributeur'])) {
+    $id = $_POST['edit_distributeur'];
+
+    // Fetch the distributeur record based on the ID
+    $selectDistributeur = "SELECT * FROM distributeur WHERE id = ?";
+    $statement = $conn->prepare($selectDistributeur);
+    $statement->bind_param("i", $id);
+    $statement->execute();
+    $result = $statement->get_result();
+    $distributeur = $result->fetch_assoc();
+
+    // Now you can display a form with the distributeur details for editing
+    echo "<form action='insertDistributeur.php' method='post'>";
+    echo "<input type='hidden' name='update_id' value='" . $distributeur['id'] . "'>";
+    echo "<input type='text' name='updated_longitude' value='" . $distributeur['longitude'] . "' placeholder='longitude' required>";
+    echo "<input type='text' name='updated_latitude' value='" . $distributeur['latitude'] . "' placeholder='latitude' required>";
+    echo "<input type='text' name='updated_adresse' value='" . $distributeur['adresse'] . "' placeholder='adresse' required>";
+    echo "<input type='number' name='updated_agence_id' value='" . $distributeur['agence_id'] . "' placeholder='agence_id' required>";
+    echo "<input type='submit' name='update_btn' value='Update'>";
+    echo "</form>";
+}
+
 
 
 
