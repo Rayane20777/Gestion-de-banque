@@ -93,7 +93,7 @@ if ($result->num_rows > 0) {
         echo "<button type='submit' name='edit_btn' class='bg-blue-600 py-2 px-8 text-white font-bold'>Edit</button>";
         echo "</form>";
         echo "</td>";
-        echo "<td>";
+        echo "<td class='whitespace-nowrap px-6 py-4'>";
         echo "<form method='post' action='insertRole.php'>";
         echo "<input type='hidden' name='delete_id' value='" . $row['id'] . "'>";
         echo "<button type='submit' name='delete_btn' class='bg-red-600 py-2 px-8 text-white font-bold'>Delete</button>";
