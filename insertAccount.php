@@ -106,7 +106,7 @@ if ($result->num_rows > 0) {
         echo "<td class='whitespace-nowrap px-6 py-4'>";
         echo "<form method='post' action='edit.php'>";
         echo "<input type='hidden' name='edit_account' value='" . $row['id'] . "'>";
-        echo "<button type='submit' name='edit_act' class='bg-blue-600 py-2 px-8 text-white font-bold'>Edit</button>";
+        echo "<button type='submit' name='edit_btn' class='bg-blue-600 py-2 px-8 text-white font-bold'>Edit</button>";
         echo "</form>";
         echo "</td>";
         echo "<form method='post' action='insertAccount.php'>";

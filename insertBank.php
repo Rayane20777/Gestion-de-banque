@@ -51,24 +51,19 @@
 <?php
 include 'cnx.php';
 
-
 if (isset($_POST['insert'])) {
     $name = $_POST['name'];
     $bank_logo = $_POST['bank_logo'];
-
-   
 
     $sql = "INSERT INTO bank (name, bank_logo) VALUES (?, ?)";
     $statement = $conn->prepare($sql);
     $statement->bind_param("ss", $name, $bank_logo);
 
     if ($statement->execute() === TRUE) {
-        echo "New role created successfully";
+        echo "New bank created successfully";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
-
-
 }
 
 $sql = "SELECT * FROM bank";
@@ -94,15 +89,15 @@ if ($result->num_rows > 0) {
         echo "<td class='whitespace-nowrap px-6 py-4'><img src='" . $row["bank_logo"] . "' alt='' width='100px' height='100px'></td>";
         echo "<td class='whitespace-nowrap px-6 py-4'>";
         echo "<form method='post' action='edit.php'>";
-        echo "<input type='hidden' name='edit_id' value='" . $row['id'] . "'>";
+        echo "<input type='hidden' name='edit_bank' value='" . $row['id'] . "'>";
         echo "<button type='submit' name='edit_btn' class='bg-blue-600 py-2 px-8 text-white font-bold'>Edit</button>";
         echo "</form>";
         echo "</td>";
+        echo "<td class='whitespace-nowrap px-6 py-4'>";
         echo "<form method='post' action='insertBank.php'>";
         echo "<input type='hidden' name='delete_id' value='" . $row['id'] . "'>";
         echo "<button type='submit' name='delete_btn' class='bg-red-600 py-2 px-8 text-white font-bold'>Delete</button>";
         echo "</form>";
-        echo "</td>";
         echo "</td>";
         echo "</tr>";
     }
@@ -117,7 +112,7 @@ if ($result->num_rows > 0) {
 if (isset($_POST['delete_btn'])) {
     $id = $_POST['delete_id'];
 
-    // Delete the record from the 'user' table
+    // Delete the record from the 'bank' table
     $deleteBank = "DELETE FROM bank WHERE id = ?";
     $statement = $conn->prepare($deleteBank);
     $statement->bind_param("i", $id);
@@ -125,29 +120,28 @@ if (isset($_POST['delete_btn'])) {
     if ($statement->execute()) {
         echo "<p class='text-green-500 font-bold'>Bank with ID $id has been deleted</p>";
     } else {
-        echo "<p class='text-red-500 font-bold'>Bank deleting user: " . $statement->error . "</p>";
+        echo "<p class='text-red-500 font-bold'>Error deleting bank: " . $statement->error . "</p>";
     }
 
     $statement->close();
 }
 
+// Handle updating
 if (isset($_POST['update'])) {
     $id = $_POST['update_id'];
     $updatedName = $_POST['updated_name'];
 
-    // Update the role record
-    $updateRole = "UPDATE role SET name = ? WHERE id = ?";
-    $statement = $conn->prepare($updateRole);
+    // Update the bank record
+    $updateBank = "UPDATE bank SET name = ? WHERE id = ?";
+    $statement = $conn->prepare($updateBank);
     $statement->bind_param("si", $updatedName, $id);
 
     if ($statement->execute()) {
-        echo "Role with ID $id has been updated successfully";
+        echo "Bank with ID $id has been updated successfully";
     } else {
-        echo "Error updating role: " . $statement->error;
+        echo "Error updating bank: " . $statement->error;
     }
 
     $statement->close();
 }
-
-
 ?>
