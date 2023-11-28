@@ -54,7 +54,9 @@ CREATE TABLE user (
     role_id INT,
     FOREIGN KEY (adresse_id) REFERENCES adresse(id),
     FOREIGN KEY (agence_id) REFERENCES agence(id),
-    FOREIGN KEY (role_id) REFERENCES role(id)
+    FOREIGN KEY (role_id) REFERENCES role(id),
+    FOREIGN KEY (account_id) REFERENCES account(id)
+
 );
 
 -- Account Table
