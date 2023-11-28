@@ -109,7 +109,11 @@ if ($result->num_rows > 0) {
         echo "<td class='whitespace-nowrap px-6 py-4'>" . $row["agence_id"] . "</td>";
         echo "<td class='whitespace-nowrap px-6 py-4'>";
         echo "<button class='bg-blue-600 py-2 px-4 text-white font-bold'>Edit</button>";
+        echo "<form method='post' action='insertUser.php'>";
+        echo "<input type='hidden' name='delete_id' value='" . $row['id'] . "'>";
         echo "<button type='submit' name='delete_btn' class='bg-red-600 py-2 px-8 text-white font-bold'>Delete</button>";
+        echo "</form>";
+        echo "</td>";
         echo "</td>";
         echo "</tr>";
     }
