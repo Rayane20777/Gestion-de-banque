@@ -46,7 +46,7 @@
 
                 <input type="number" id="agence_id" name="agence_id" placeholder="agence_id" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
 
-                <input type="submit" value="Insert Distributeur" class="bg-gray-600 text-white text-xl rounded">
+                <input type="submit" name="insert" value="Insert User" class="bg-gray-600 text-white text-xl rounded">
             </form>
         </section>
 </body>

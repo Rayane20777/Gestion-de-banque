@@ -37,7 +37,7 @@
         <section id="add" class="mt-20 mx-auto max-w-7xl py-6 sm:px-6 lg:px-8 ">
             <form action="insertRole.php" method="post" class="grid gap-4 grid-cols-2 border-b-4 border-gray-600 pb-4">
                 <input type="text" id="name" name="name" placeholder="name" class="pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" required>
-                <input type="submit" value="Insert Role"  class="bg-gray-600 text-white text-xl rounded">
+                <input type="submit" name="insert" value="Insert User" class="bg-gray-600 text-white text-xl rounded">
             </form>
         </section>
 </body>

@@ -59,7 +59,7 @@
 <?php
 include 'cnx.php';
 
-if (isset($_POST['inser'])) {
+if (isset($_POST['insert'])) {
     $usersnames = isset($_POST['usersnames']) ? $_POST['usersnames'] : null;
     $passwords = isset($_POST['passwords']) ? $_POST['passwords'] : null;
     $adresse_id = isset($_POST['adresse_id']) ? $_POST['adresse_id'] : null;
