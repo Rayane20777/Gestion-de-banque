@@ -184,6 +184,12 @@ if (isset($_POST['logout'])) {
         } else {
             echo "<p class='text-red-500'>Erreur lors de l'exécution de la requête : " . mysqli_error($conn) . "</p>";
         }
+
+        echo "<form method='post' action=''>
+                <button type='submit' name='logout' class='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'>
+                    Logout
+                </button>
+              </form>";
         ?>
 
     </div>
